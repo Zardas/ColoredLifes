@@ -22,20 +22,15 @@ public class PlayerCollisionScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {   
-        if(collision.gameObject.CompareTag("Platform"))
+        /*if(collision.gameObject.CompareTag("DoesDamage"))
         {
-            playerScript.playerMovementScript.isGrounded = true;
-            Debug.Log("Grounded");
-        }
+            //Damage taken
+        }*/
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            playerScript.playerMovementScript.isGrounded = false;
-            Debug.Log("Not Grounded anymore");
-        }
+
     }
 
 }

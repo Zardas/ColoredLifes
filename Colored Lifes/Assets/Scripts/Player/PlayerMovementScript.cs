@@ -18,7 +18,9 @@ public class PlayerMovementScript : MonoBehaviour
     internal bool isGrounded;            // Whether or not the player is grounded.
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
-
+    [SerializeField]
+    private float jumpsMax = 1;
+    private float jumpsAvailable = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -29,14 +31,14 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("Number of jumps available : " + jumpsAvailable);
     }
 
     //Fixed update is used when physic is involved
     private void FixedUpdate()
     {
         //The ground check is done in PlayerCollisionScript
-
+        checkGround();
         Move(playerScript.playerInputScript.horizontalMove * runSpeed * Time.fixedDeltaTime, playerScript.playerInputScript.isUpPressed);
     }
 
@@ -47,7 +49,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
 
         //only control the player if grounded or airControl is turned on
-        if (isGrounded || m_AirControl)
+        if (jumpsAvailable > 0 || m_AirControl)
         {
 
             // Move the character
@@ -65,12 +67,41 @@ public class PlayerMovementScript : MonoBehaviour
             }
         }
         // If the player should jump
-        if (isGrounded && jump)
+        if (jumpsAvailable > 0 && jump)
         {
             // Make the character jump
             playerScript.rigidBody.velocity = new Vector2(move, jumpForce);
+            jumpsAvailable--;
         }
     }
+
+
+    private void checkGround()
+    {
+        isGrounded = false;
+
+        BoxCollider2D boxCollider = playerScript.boxCollider2D;
+        float extraHeight = .1f;
+
+        RaycastHit2D[] raycastHits = Physics2D.BoxCastAll(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, extraHeight);
+        //RaycastHit2D[] raycastHits = Physics2D.RaycastAll(boxCollider.bounds.center, Vector2.down, boxCollider.bounds.extents.y + extraHeight);
+
+        Color rayColor = Color.red;
+        
+        foreach(RaycastHit2D raycastResult in raycastHits)
+        {
+            if (raycastResult.collider != null && raycastResult.collider.tag == "Platform")
+            {
+                rayColor = Color.green;
+                isGrounded = true;
+                jumpsAvailable = jumpsMax;
+            }
+        }
+
+        //Debug.DrawRay(boxCollider.bounds.center, Vector2.down * (boxCollider.bounds.extents.y + extraHeight));
+    }
+
+
 
 
     private void Flip()

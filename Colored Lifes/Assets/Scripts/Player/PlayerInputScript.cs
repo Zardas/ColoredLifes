@@ -30,15 +30,15 @@ public class PlayerInputScript : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal");
 
         //Left pressed
-        isLeftPressed = Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow);
+        isLeftPressed = Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftArrow);
 
         //Right pressed
-        isRightPressed = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+        isRightPressed = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
 
         //Up pressed
-        isUpPressed = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.UpArrow);
+        isUpPressed = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.UpArrow);
 
         //Down pressed
-        isDownPressed = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+        isDownPressed = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
     }
 }
