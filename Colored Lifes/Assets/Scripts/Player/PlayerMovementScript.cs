@@ -16,7 +16,12 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded
 
     internal bool isGrounded;            // Whether or not the player is grounded.
+    internal bool isJumping;            // Whether or not the player is jumping
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+
+    private float jumpTimeCounter;
+    [SerializeField]
+    private float jumpTime;
 
     [SerializeField]
     private float jumpsMax = 1;
@@ -32,20 +37,55 @@ public class PlayerMovementScript : MonoBehaviour
     void Update()
     {
         Debug.Log("Number of jumps available : " + jumpsAvailable);
-    }
-
-    //Fixed update is used when physic is involved
-    private void FixedUpdate()
-    {
-        //The ground check is done in PlayerCollisionScript
+        //Checking if the player is grounded
         checkGround();
-        Move(playerScript.playerInputScript.horizontalMove * runSpeed * Time.fixedDeltaTime, playerScript.playerInputScript.isUpPressed);
+        Jump();
+    }
+
+ 
+    //Fixed update is used when physic is involved
+    void FixedUpdate()
+    {
+
+        //The ground check is done in PlayerCollisionScript
+        //checkGround();
+        MoveHorizontal(playerScript.playerInputScript.horizontalMove * runSpeed * Time.fixedDeltaTime);
     }
 
 
+    private void Jump()
+    {
+        if (jumpsAvailable > 0 && playerScript.playerInputScript.isUpPressed_down)
+        {
+            // Make the character jump
+            isJumping = true;
+            jumpTimeCounter = jumpTime;
+            playerScript.rigidBody.velocity = Vector2.up * jumpForce;
+            jumpsAvailable--;
+        }
 
+        //Le joueur augmente la taille de son saut s'il continue d'appuyer sur jump
+        if(playerScript.playerInputScript.isUpPressed && isJumping)
+        {
+            if(jumpTimeCounter > 0)
+            {
+                playerScript.rigidBody.velocity = Vector2.up * jumpForce;
+                jumpTimeCounter -= Time.deltaTime;
+            } else
+            {
+                isJumping = false;
+            }
+        }
 
-    private void Move(float move, bool jump)
+        //Dès que le joueur arrête d'appuyer sur space, son saut d'arrête
+        if(playerScript.playerInputScript.isUpPressed_up)
+        {
+            isJumping = false;
+        }
+        
+    }
+
+    private void MoveHorizontal(float move)
     {
 
         //only control the player if grounded or airControl is turned on
@@ -65,13 +105,6 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 Flip();
             }
-        }
-        // If the player should jump
-        if (jumpsAvailable > 0 && jump)
-        {
-            // Make the character jump
-            playerScript.rigidBody.velocity = new Vector2(move, jumpForce);
-            jumpsAvailable--;
         }
     }
 

@@ -11,8 +11,11 @@ public class PlayerInputScript : MonoBehaviour
 
     internal bool isLeftPressed;
     internal bool isRightPressed;
+    internal bool isUpPressed_down;
+    internal bool isUpPressed_up;
     internal bool isUpPressed;
     internal bool isDownPressed;
+    internal bool isXPressed;
 
     internal float horizontalMove = 0f;
 
@@ -35,10 +38,16 @@ public class PlayerInputScript : MonoBehaviour
         //Right pressed
         isRightPressed = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
 
-        //Up pressed
-        isUpPressed = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.UpArrow);
+        //Up pressed down
+        isUpPressed_down = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space);
+        //Up pressed (use for jump height control)
+        isUpPressed_up = Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Space);
+        isUpPressed = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space);
 
         //Down pressed
         isDownPressed = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+
+        //X pressed
+        isXPressed = Input.GetKeyDown(KeyCode.X);
     }
 }

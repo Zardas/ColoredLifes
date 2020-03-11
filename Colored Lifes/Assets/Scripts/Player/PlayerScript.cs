@@ -32,6 +32,14 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(playerInputScript.isXPressed)
+        {
+            PlayerDie();
+        }
+    }
+
+    private void PlayerDie()
+    {
+        Destroy(this);
     }
 }
