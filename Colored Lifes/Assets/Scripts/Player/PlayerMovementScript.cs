@@ -11,7 +11,7 @@ public class PlayerMovementScript : MonoBehaviour
 
 
     [SerializeField] private float runSpeed = 400f;                              // Amount of force added when the player move
-    [SerializeField] private float jumpForce = 8f;                            // Amount of force added when the player jumps
+    [SerializeField] private float jumpForce = 8f;                              // Amount of force added when the player jumps
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded
 
@@ -24,8 +24,8 @@ public class PlayerMovementScript : MonoBehaviour
     private float jumpTime;
 
     [SerializeField]
-    private float jumpsMax = 1;
-    private float jumpsAvailable = 0;
+    private float additionnalJumps = 1;
+    private float additionnalJumpsAvailable = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,7 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Number of jumps available : " + jumpsAvailable);
+        Debug.Log("Number of additionnals jumps available : " + additionnalJumpsAvailable);
         //Checking if the player is grounded
         checkGround();
         Jump();
@@ -55,13 +55,16 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void Jump()
     {
-        if (jumpsAvailable > 0 && playerScript.playerInputScript.isUpPressed_down)
+        if ((additionnalJumpsAvailable > 0 || isGrounded) && playerScript.playerInputScript.isUpPressed_down)
         {
             // Make the character jump
             isJumping = true;
             jumpTimeCounter = jumpTime;
+            if(!isGrounded)
+            {
+                additionnalJumpsAvailable--;
+            }
             playerScript.rigidBody.velocity = Vector2.up * jumpForce;
-            jumpsAvailable--;
         }
 
         //Le joueur augmente la taille de son saut s'il continue d'appuyer sur jump
@@ -89,7 +92,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
 
         //only control the player if grounded or airControl is turned on
-        if (jumpsAvailable > 0 || m_AirControl)
+        if (additionnalJumpsAvailable > 0 || m_AirControl)
         {
 
             // Move the character
@@ -127,7 +130,7 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 rayColor = Color.green;
                 isGrounded = true;
-                jumpsAvailable = jumpsMax;
+                additionnalJumpsAvailable = additionnalJumps;
             }
         }
 
