@@ -27,6 +27,9 @@ public class PlayerMovementScript : MonoBehaviour
     private float additionnalJumps = 1;
     private float additionnalJumpsAvailable = 0;
 
+    [SerializeField]
+    private float fallSpeed = 2.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,8 @@ public class PlayerMovementScript : MonoBehaviour
         //Checking if the player is grounded
         checkGround();
         Jump();
+        //if the player is falling, we accelerate is fall
+        smoothMovement();
     }
 
  
@@ -86,6 +91,18 @@ public class PlayerMovementScript : MonoBehaviour
             isJumping = false;
         }
         
+    }
+
+    private void smoothMovement()
+    {
+        //If the player is falling
+        if(playerScript.rigidBody.velocity.y < 0)
+        {
+            playerScript.rigidBody.velocity += Vector2.up * Physics2D.gravity.y * (fallSpeed - 1) * Time.deltaTime; //The -1 is because the gravity already apply a 1 in unity
+        } else if(playerScript.rigidBody.velocity.y > 0 && !playerScript.playerInputScript.isUpPressed)
+        {
+            playerScript.rigidBody.velocity += Vector2.up * Physics2D.gravity.y * (jumpForce - 1) * Time.deltaTime;
+        }
     }
 
     private void MoveHorizontal(float move)
