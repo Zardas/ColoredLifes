@@ -15,6 +15,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     public GameObject outline;
 
+    [SerializeField]
+    public GameObject corpse;
+
     public Spawner spawner;
 
     public string nextPower;
@@ -49,7 +52,13 @@ public class PlayerScript : MonoBehaviour
 
     private void PlayerDie()
     {
+        //Leave corpse
+        Instantiate(corpse, transform.position, transform.rotation);
+
+        //Spawn new player
         spawner.spawnPlayer(nextPower);
+
+        //Kill current player
         Destroy(this.gameObject);
     }
 

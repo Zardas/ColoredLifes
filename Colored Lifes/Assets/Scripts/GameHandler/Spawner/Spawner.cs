@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour
     private GameObject doubleJumpPlayer;
 
     [SerializeField]
-    private bool spawnFacingRight;
+    private bool spawnFacingLeft;
 
     private GameObject currentPlayer;
 
@@ -42,8 +42,7 @@ public class Spawner : MonoBehaviour
     //The player spawn
     public void spawnPlayer(string powerup)
     {
-        //The player spawn
-
+        //Apply the powerup
         switch(powerup)
         {
             case "none":
@@ -60,13 +59,9 @@ public class Spawner : MonoBehaviour
         currentPlayer.GetComponent<PlayerScript>().setSpawner(this);
 
 
-
-
-        //Détermine s'il faut flip le sprite au démarrage
-        /*if ((!currentPlayer.GetComponent<PlayerMovementScript>().m_FacingRight && spawnFacingRight) ||
-           (currentPlayer.GetComponent<PlayerMovementScript>().m_FacingRight && !spawnFacingRight))
+        if(spawnFacingLeft)
         {
             currentPlayer.GetComponent<PlayerMovementScript>().Flip();
-        }*/
+        }
     }
 }
