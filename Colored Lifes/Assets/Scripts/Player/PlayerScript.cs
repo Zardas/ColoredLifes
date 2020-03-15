@@ -12,6 +12,13 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     internal PlayerCollisionScript playerCollisionScript;
 
+    [SerializeField]
+    public GameObject outline;
+
+    public Spawner spawner;
+
+    public string nextPower;
+
     internal Rigidbody2D rigidBody;
     internal BoxCollider2D boxCollider2D;
 
@@ -26,7 +33,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        nextPower = "none";
     }
 
     // Update is called once per frame
@@ -34,12 +41,20 @@ public class PlayerScript : MonoBehaviour
     {
         if(playerInputScript.isXPressed)
         {
+            //Make the player die
             PlayerDie();
         }
     }
 
+
     private void PlayerDie()
     {
-        Destroy(this);
+        spawner.spawnPlayer(nextPower);
+        Destroy(this.gameObject);
+    }
+
+    public void setSpawner(Spawner spawner)
+    {
+        this.spawner = spawner;
     }
 }

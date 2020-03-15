@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GameHandler\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCollisionScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInputScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovementScript.cs" />

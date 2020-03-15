@@ -17,7 +17,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     internal bool isGrounded;            // Whether or not the player is grounded.
     internal bool isJumping;            // Whether or not the player is jumping
-    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
     private float jumpTimeCounter;
     [SerializeField]
@@ -39,7 +39,7 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Number of additionnals jumps available : " + additionnalJumpsAvailable);
+        //Debug.Log("Number of additionnals jumps available : " + additionnalJumpsAvailable);
         //Checking if the player is grounded
         checkGround();
         Jump();
@@ -157,7 +157,7 @@ public class PlayerMovementScript : MonoBehaviour
 
 
 
-    private void Flip()
+    public void Flip()
     {
         // Switch the way the player is labelled as facing.
         m_FacingRight = !m_FacingRight;
