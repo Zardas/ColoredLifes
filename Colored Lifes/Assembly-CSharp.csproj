@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GameHandler\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Helpers\Button.cs" />
+    <Compile Include="Assets\Scripts\Helpers\Characteristics.cs" />
     <Compile Include="Assets\Scripts\Helpers\Door.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerCollisionScript.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerInputScript.cs" />

@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5875029148990219329}
   - component: {fileID: 1229253064755191607}
   - component: {fileID: 4878139860297116160}
+  - component: {fileID: 114500067048432156}
   m_Layer: 0
   m_Name: MetalBoxes_0
-  m_TagString: Heavy
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,3 +129,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &114500067048432156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368612591407608480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc33f5eb909ed394f83614a08d2b05d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHeavy: 1

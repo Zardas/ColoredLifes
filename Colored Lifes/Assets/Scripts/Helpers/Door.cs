@@ -16,13 +16,22 @@ public class Door : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
 
-        isOpen = true;
+        isOpen = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+
+    public void setDoor(bool buttonPushed)
+    {
+        isOpen = buttonPushed;
+
+        spriteRenderer.enabled = !buttonPushed;
+        boxCollider.enabled = !buttonPushed;
     }
 
     public void open()
