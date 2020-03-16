@@ -35,8 +35,6 @@ public class Button : MonoBehaviour
         foreach(Collider2D col in hitColliders)
         {
             //On vérifie que c'est un truc lourd
-            Debug.Log(i + " : " + col.gameObject.name);
-
             Characteristics car = col.gameObject.GetComponent<Characteristics>();
 
             if(car != null)
@@ -45,7 +43,6 @@ public class Button : MonoBehaviour
             }
         }
 
-        Debug.Log("Is pushed ? " + isPushed);
 
         associatedDoor.setDoor(isPushed);
     }

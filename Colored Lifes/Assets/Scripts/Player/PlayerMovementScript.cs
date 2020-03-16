@@ -55,6 +55,7 @@ public class PlayerMovementScript : MonoBehaviour
         //The ground check is done in PlayerCollisionScript
         //checkGround();
         MoveHorizontal(playerScript.playerInputScript.horizontalMove * runSpeed * Time.fixedDeltaTime);
+        
     }
 
 
@@ -111,6 +112,9 @@ public class PlayerMovementScript : MonoBehaviour
         //only control the player if grounded or airControl is turned on
         if (additionnalJumpsAvailable > 0 || m_AirControl)
         {
+
+           //Little TP to deal with the blocking due to Tilemaping collisions
+            littleHorizontalTP();
 
             // Move the character
             playerScript.rigidBody.velocity = new Vector2(move, playerScript.rigidBody.velocity.y);
@@ -169,4 +173,38 @@ public class PlayerMovementScript : MonoBehaviour
     }
 
 
+
+
+
+    private void littleHorizontalTP()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(playerScript.transform.position, new Vector2(playerScript.playerInputScript.horizontalMove, 0), 1);
+        //S'il y a un truc devant nous, on vérifie qu'il n'est pas lourd. S'il est lourd, on n'avance pas
+        if(hit.collider != null)
+        {
+            Debug.Log("TP : " + hit.collider.gameObject.name);
+            Characteristics car = hit.collider.gameObject.GetComponent<Characteristics>();
+            if (car != null)
+            {
+                if(!car.isHeavy)
+                {
+                    Debug.Log("On se TP");
+                    //Little TP to deal with the little block due to TileMap
+                    playerScript.transform.position = new Vector3(playerScript.transform.position.x + playerScript.playerInputScript.horizontalMove * 0.01f, playerScript.transform.position.y, playerScript.transform.position.z);
+                }
+            }
+        } else //S'il n'y a rien devant nous, on peu se TP de base
+        {
+            playerScript.transform.position = new Vector3(playerScript.transform.position.x + playerScript.playerInputScript.horizontalMove * 0.01f, playerScript.transform.position.y, playerScript.transform.position.z);
+        }
+
+       
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
+        Gizmos.DrawRay(new Ray(playerScript.transform.position, new Vector2(playerScript.playerInputScript.horizontalMove, 0)));
+    }
 }
