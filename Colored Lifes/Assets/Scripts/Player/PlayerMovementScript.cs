@@ -176,19 +176,20 @@ public class PlayerMovementScript : MonoBehaviour
 
 
 
+    //Petit TP horizontal afin de gérer les problèmes de blocage dû au BoxCollider au niveau du TileMap
     private void littleHorizontalTP()
     {
         RaycastHit2D hit = Physics2D.Raycast(playerScript.transform.position, new Vector2(playerScript.playerInputScript.horizontalMove, 0), 1);
         //S'il y a un truc devant nous, on vérifie qu'il n'est pas lourd. S'il est lourd, on n'avance pas
         if(hit.collider != null)
         {
-            Debug.Log("TP : " + hit.collider.gameObject.name);
+            //Debug.Log("TP : " + hit.collider.gameObject.name);
             Characteristics car = hit.collider.gameObject.GetComponent<Characteristics>();
             if (car != null)
             {
                 if(!car.isHeavy)
                 {
-                    Debug.Log("On se TP");
+                    //Debug.Log("On se TP");
                     //Little TP to deal with the little block due to TileMap
                     playerScript.transform.position = new Vector3(playerScript.transform.position.x + playerScript.playerInputScript.horizontalMove * 0.01f, playerScript.transform.position.y, playerScript.transform.position.z);
                 }

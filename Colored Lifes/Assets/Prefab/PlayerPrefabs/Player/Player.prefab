@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 254162748356321371}
   - component: {fileID: 254162748356321370}
   - component: {fileID: 254162748356321369}
+  - component: {fileID: 7699641192182926481}
   m_Layer: 9
   m_Name: Player
   m_TagString: Respawn
@@ -199,6 +200,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScript: {fileID: 254162748356321372}
+--- !u!114 &7699641192182926481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254162748356321348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc33f5eb909ed394f83614a08d2b05d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHeavy: 0
+  canPushHeavyObject: 0
+  givePowerupWhenGathered: 
 --- !u!1 &4769592844862407543
 GameObject:
   m_ObjectHideFlags: 0

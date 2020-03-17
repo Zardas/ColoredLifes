@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5875029148990219329}
   - component: {fileID: 1229253064755191607}
   - component: {fileID: 4878139860297116160}
+  - component: {fileID: 8218517136640834517}
   - component: {fileID: 114500067048432156}
   m_Layer: 0
   m_Name: MetalBoxes_0
@@ -129,6 +130,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &8218517136640834517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368612591407608480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d6c572ee13d1346947bf2e97751b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114500067048432156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +155,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeavy: 1
+  canPushHeavyObject: 0

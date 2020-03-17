@@ -45,6 +45,9 @@ public class Button : MonoBehaviour
 
 
         associatedDoor.setDoor(isPushed);
+
+        pushedButton.GetComponent<SpriteRenderer>().enabled = isPushed;
+        unpushedButton.GetComponent<SpriteRenderer>().enabled = !isPushed;
     }
 
 

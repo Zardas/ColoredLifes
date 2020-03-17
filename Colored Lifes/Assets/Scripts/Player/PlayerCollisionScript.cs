@@ -26,15 +26,32 @@ public class PlayerCollisionScript : MonoBehaviour
         {
             //Damage taken
         }*/
-        if(collision.gameObject.name == "Powerup_doubleJump")
-        {
-            Destroy(collision.gameObject);
 
-            playerScript.nextPower = "doublejump";
-            playerScript.outline.GetComponent<SpriteRenderer>().color = new Color(185f/255, 104f/255, 25f/255, 1f);
-            playerScript.outline.GetComponent<SpriteRenderer>().enabled = true;
-            
-            Debug.Log("Double jump");
+        Characteristics car = collision.gameObject.GetComponent<Characteristics>();
+        if(car != null)
+        {
+
+            //The player gathered a double jump power-up
+            if(car.givePowerupWhenGathered == "doubleJump")
+            {
+                Destroy(collision.gameObject);
+
+                playerScript.nextPower = "doublejump";
+                playerScript.outline.GetComponent<SpriteRenderer>().color = new Color(185f / 255, 104f / 255, 25f / 255, 1f);
+                playerScript.outline.GetComponent<SpriteRenderer>().enabled = true;
+
+                Debug.Log("Double jump");
+            }
+            if (car.givePowerupWhenGathered == "heavy")
+            {
+                Destroy(collision.gameObject);
+
+                playerScript.nextPower = "heavy";
+                playerScript.outline.GetComponent<SpriteRenderer>().color = new Color(23f / 255, 45f / 255, 109f / 255, 1f);
+                playerScript.outline.GetComponent<SpriteRenderer>().enabled = true;
+
+                Debug.Log("Heavy");
+            }
         }
     }
 

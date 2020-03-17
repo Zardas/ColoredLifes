@@ -9,6 +9,8 @@ public class Spawner : MonoBehaviour
     private GameObject basiquePlayer;
     [SerializeField]
     private GameObject doubleJumpPlayer;
+    [SerializeField]
+    private GameObject heavyPlayer;
 
     [SerializeField]
     private bool spawnFacingLeft;
@@ -50,6 +52,9 @@ public class Spawner : MonoBehaviour
                 break;
             case "doublejump":
                 currentPlayer = Instantiate(doubleJumpPlayer, _transform.position, _transform.rotation);
+                break;
+            case "heavy":
+                currentPlayer = Instantiate(heavyPlayer, _transform.position, _transform.rotation);
                 break;
             default:
                 currentPlayer = Instantiate(basiquePlayer, _transform.position, _transform.rotation);
